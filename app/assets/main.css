@@ -1,0 +1,8 @@
+@import 'bulma/css/bulma.css';
+
+@font-face {
+  font-family: 'Lato';
+  font-display: swap;
+  src: url('/fonts/Lato.woff2') format('woff2'), url('/fonts/Lato.woff') format('woff');
+  font-weight: 700;
+}
