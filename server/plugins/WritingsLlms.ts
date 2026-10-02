@@ -1,7 +1,7 @@
 import { queryCollection } from '@nuxt/content/server'
 
-// Adds the home page's Substack writings (frontmatter `links`) to /llms.txt and /llms-full.txt.
-// The /raw/index.md twin already lists them through Nuxt Content's built-in `links` support.
+// Adds the Contents page's Substack writings (frontmatter `links`) to /llms.txt and /llms-full.txt.
+// The /raw/contents.md twin already lists them through Nuxt Content's built-in `links` support.
 
 interface WritingLink {
   label: string
@@ -13,8 +13,8 @@ const getWritingLinksFromDocument = (Document: unknown): WritingLink[] =>
 
 export default defineNitroPlugin((NitroApp) => {
   NitroApp.hooks.hook('llms:generate', async (Event, Options) => {
-    const HomePage = await queryCollection(Event, 'pages').path('/').first()
-    const Writings = getWritingLinksFromDocument(HomePage)
+    const ContentsPage = await queryCollection(Event, 'pages').path('/contents').first()
+    const Writings = getWritingLinksFromDocument(ContentsPage)
     if (!Writings.length) return
 
     Options.sections.push({

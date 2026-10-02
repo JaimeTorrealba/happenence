@@ -2,7 +2,7 @@ import { defineContentConfig, defineCollection, z } from '@nuxt/content'
 import { asSitemapCollection } from '@nuxtjs/sitemap/content'
 
 // Every Markdown file in /content becomes a page (content/index.md -> "/").
-// `links` is read by Nuxt Content's built-in /raw/<page>.md route and appended as a list.
+// `links` (the writing cards on content/contents.md) is read by Nuxt Content's built-in /raw/<page>.md route and appended as a list.
 export default defineContentConfig({
   collections: {
     pages: defineCollection(

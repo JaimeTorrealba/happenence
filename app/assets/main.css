@@ -16,8 +16,8 @@ html {
 }
 body {
   margin: 0;
-  background: #fff;
-  color: #4a4a4a;
+  background: #f7f7f7;
+  color: #333;
   font-family: 'Lato', system-ui, sans-serif;
   line-height: 1.5;
 }
@@ -34,4 +34,23 @@ a {
 img {
   max-width: 100%;
   display: block;
+}
+
+/* Entrance animations (utils/animations.js) start hidden so SSR HTML doesn't flash before hydration.
+   Reduced-motion users skip the animation, so they keep the visible state; no-JS is reset in nuxt.config. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-title,
+  .reveal-fade {
+    opacity: 0;
+  }
+}
+
+/* Route change: fade the old page out, then the new one in (app.pageTransition in nuxt.config) */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s ease-out;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
 }

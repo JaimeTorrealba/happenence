@@ -5,3 +5,7 @@
 
 - 2026-10-02: Planned a custom `/raw/[...slug].md` server route before checking the installed `@nuxt/content` — v3.16 already ships it (plus llms.txt integration) when `nuxt-llms` is installed. Check node_modules for built-ins before planning custom code.
 - 2026-10-02: Used static `src="/images/..."` in a Vue template for assets that didn't exist yet in `public/`; Vite tried to resolve them and crashed with ENOENT (`C:\images\...`). For placeholder/not-yet-added public assets, bind `:src` to a string so they stay runtime URLs.
+- 2026-10-02: Put a plain `.ts` shader module inside `app/components/about/`. Nuxt auto-registers files in `components/` (including .ts) as components, so non-component helpers don't belong there. Inline them in the .vue file or put them in `utils/`.
+- 2026-10-02: Compared `route.path === item.to` exactly in SiteNavbar, so `/about/` (trailing slash, as static hosts often serve) shows About instead of Home. Normalize trailing slashes when comparing routes.
+- 2026-10-02: Ported the Vue Bits Aurora shader as-is and only changed the colours for a light page. Its output multiplies colour by intensity (made for dark backgrounds), which leaves dark grey edges on #f7f7f7 however pale the stops are. Check how a shader composites against the actual page background before tuning colours.
+- 2026-10-02: Used `gsap.from` for entrance animations on server-rendered elements. The SSR HTML shows them visible until hydration, then GSAP hides them, so they flash. On SSR pages, set the hidden start state in CSS and animate in with `fromTo`/`to`.

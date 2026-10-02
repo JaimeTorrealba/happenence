@@ -1,6 +1,4 @@
 <script setup>
-import gsap from "gsap";
-
 const { data: HomePage } = await useAsyncData("home-page", () =>
   queryCollection("pages").path("/").first(),
 );
@@ -8,8 +6,6 @@ const { data: HomePage } = await useAsyncData("home-page", () =>
 if (!HomePage.value) {
   throw createError({ statusCode: 404, statusMessage: "Home page content not found", fatal: true });
 }
-
-const Writings = computed(() => HomePage.value?.links ?? []);
 
 useSeoMeta({
   description: () => HomePage.value?.description,
@@ -23,35 +19,20 @@ useHead({
   link: [{ rel: "alternate", type: "text/markdown", href: "/raw/index.md" }],
 });
 
-const titleRef = ref(null);
-onMounted(() => {
-  gsap.from(titleRef.value, { y: -100, ease: "power2.out", duration: 1 });
-});
+// Bound as a runtime URL (served from public/) so Vite does not try to bundle it.
+const HomeLogoSrc = "/happenence-logo.svg";
+
+const LogoTitleRef = ref(null);
+useFadeIn(LogoTitleRef);
 </script>
 
 <template>
   <main class="home-container">
-    <div class="overflow-hidden">
-      <h1 ref="titleRef" class="home-title">Happenence</h1>
-    </div>
-    <div class="home-columns">
-      <div class="home-column"><HomeIntro :page="HomePage" /></div>
-      <div class="home-column cards-wrapper">
-        <ClientOnly>
-          <Cards :writings="Writings" />
-          <!-- Server-rendered list so crawlers and agents see the writing links -->
-          <template #fallback>
-            <nav aria-label="Writings">
-              <ul>
-                <li v-for="Writing in Writings" :key="Writing.to">
-                  <a :href="Writing.to">{{ Writing.label }}</a>
-                </li>
-              </ul>
-            </nav>
-          </template>
-        </ClientOnly>
-      </div>
-    </div>
+    <!-- The logo keeps the h1 so the page still has "Happenence" as its main heading -->
+    <h1 ref="LogoTitleRef" class="home-title reveal-fade">
+      <img :src="HomeLogoSrc" alt="Happenence" class="home-logo" />
+    </h1>
+    <div class="home-column"><HomeIntro :page="HomePage" /></div>
   </main>
 </template>
 
@@ -65,22 +46,16 @@ onMounted(() => {
 .home-title {
   font-size: 3rem;
   text-align: center;
-  margin-top: 1rem;
   padding-bottom: 1rem;
 }
+.home-logo {
+  width: min(560px, 100%);
+  height: auto;
+  margin-inline: auto;
+}
 .home-column {
+  max-width: 672px;
+  margin-inline: auto;
   padding: 0.75rem;
-}
-.cards-wrapper {
-  position: relative;
-}
-@media (min-width: 1024px) {
-  .home-columns {
-    display: flex;
-    gap: 0.25rem;
-  }
-  .home-column {
-    flex: 1 1 0;
-  }
 }
 </style>

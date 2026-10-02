@@ -33,9 +33,12 @@ export default defineNuxtConfig({
   ],
 
   app: {
+    pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       htmlAttrs: { lang: 'en' },
       link: [{ rel: 'alternate', type: 'text/plain', href: '/llms.txt', title: 'LLM-friendly site index' }],
+      // Without JS the entrance animations never run, so show the elements they would reveal.
+      noscript: [{ innerHTML: '<style>.reveal-title,.reveal-fade{opacity:1!important}</style>' }],
     },
   },
 

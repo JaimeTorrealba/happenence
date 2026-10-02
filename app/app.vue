@@ -9,6 +9,7 @@ useHead({
 </script>
 
 <template>
+  <SiteNavbar />
   <NuxtPage />
   <SiteFooter />
 </template>

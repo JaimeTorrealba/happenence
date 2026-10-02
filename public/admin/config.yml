@@ -29,6 +29,17 @@ collections:
             hint: One or two sentences. Used by Google, social previews and AI assistants.
           - { label: Button text, name: buttonText, widget: string }
           - { label: Button link, name: buttonLink, widget: string }
+          - { label: Body, name: body, widget: markdown }
+      - name: contents
+        label: Contents
+        file: content/contents.md
+        format: frontmatter
+        fields:
+          - { label: Title, name: title, widget: string }
+          - label: SEO description
+            name: description
+            widget: text
+            hint: One or two sentences. Used by Google, social previews and AI assistants.
           - label: Writings
             name: links
             widget: list
@@ -38,4 +49,26 @@ collections:
               - { label: Link, name: to, widget: string }
               - { label: Image, name: image, widget: image, required: false }
               - { label: Image description (alt text), name: imageAlt, widget: string, required: false }
+          - { label: Body, name: body, widget: markdown, required: false }
+      - name: about
+        label: About
+        file: content/about.md
+        format: frontmatter
+        fields:
+          - { label: Title, name: title, widget: string }
+          - label: SEO description
+            name: description
+            widget: text
+            hint: One or two sentences. Used by Google, social previews and AI assistants.
+          - { label: Body, name: body, widget: markdown }
+      - name: legal
+        label: Legal
+        file: content/legal.md
+        format: frontmatter
+        fields:
+          - { label: Title, name: title, widget: string }
+          - label: SEO description
+            name: description
+            widget: text
+            hint: One or two sentences. Used by Google, social previews and AI assistants.
           - { label: Body, name: body, widget: markdown }

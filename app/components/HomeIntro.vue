@@ -2,9 +2,14 @@
 defineProps({
   page: { type: Object, required: true },
 });
+
+const IntroTitleRef = ref(null);
+useTitleReveal(IntroTitleRef, { delay: 0.3 });
 </script>
 <template>
-  <h2 class="home-intro-title">{{ page.title }}</h2>
+  <div class="overflow-hidden">
+    <h2 ref="IntroTitleRef" class="home-intro-title reveal-title">{{ page.title }}</h2>
+  </div>
   <ContentRenderer :value="page" class="home-intro-body" />
   <div v-if="page.buttonLink" class="home-intro-actions">
     <a :href="page.buttonLink" class="home-intro-button">{{ page.buttonText }}</a>
