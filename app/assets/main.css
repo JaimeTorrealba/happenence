@@ -1,8 +1,37 @@
-@import 'bulma/css/bulma.css';
-
 @font-face {
   font-family: 'Lato';
   font-display: swap;
-  src: url('/fonts/Lato.woff2') format('woff2'), url('/fonts/Lato.woff') format('woff');
-  font-weight: 700;
+  src: url('./fonts/Lato-Regular.woff2') format('woff2');
+  font-weight: 400;
+}
+
+/* Minimal base (replaces the reset Bulma used to provide) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: #fff;
+  color: #4a4a4a;
+  font-family: 'Lato', system-ui, sans-serif;
+  line-height: 1.5;
+}
+h1,
+h2,
+p,
+ul {
+  margin: 0;
+}
+a {
+  color: #485fc7;
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+  display: block;
 }

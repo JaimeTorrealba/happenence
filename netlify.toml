@@ -1,0 +1,29 @@
+[build]
+  command = "pnpm generate"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# Markdown twins of each page — readable by agents, kept out of Google's index.
+[[headers]]
+  for = "/raw/*"
+  [headers.values]
+    Content-Type = "text/markdown; charset=utf-8"
+    X-Robots-Tag = "noindex"
+
+[[headers]]
+  for = "/llms.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
+[[headers]]
+  for = "/llms-full.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
+# Advertise the LLM index on every response.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Link = "</llms.txt>; rel=\"llms-txt\""

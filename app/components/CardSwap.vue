@@ -8,7 +8,7 @@
     }"
   >
     <div
-      v-for="(_, index) in 3"
+      v-for="(_, index) in count"
       :key="index"
       ref="cardRefs"
       class="card-swap-card"
@@ -27,6 +27,7 @@
 import gsap from 'gsap';
 
 export interface CardSwapProps {
+  count?: number;
   width?: number | string;
   height?: number | string;
   cardDistance?: number;
@@ -73,6 +74,7 @@ export { makeSlot, placeNow };
 import { ref, onMounted, onUnmounted, watch, nextTick, computed, useTemplateRef } from 'vue';
 
 const props = withDefaults(defineProps<CardSwapProps>(), {
+  count: 3,
   width: 500,
   height: 400,
   cardDistance: 60,
@@ -89,7 +91,7 @@ const emit = defineEmits<{
 
 const containerRef = useTemplateRef<HTMLDivElement>('containerRef');
 const cardRefs = ref<HTMLElement[]>([]);
-const order = ref<number[]>([0, 1, 2]);
+const order = ref<number[]>(Array.from({ length: props.count }, (_, i) => i));
 const tlRef = ref<gsap.core.Timeline | null>(null);
 const intervalRef = ref<number>();
 

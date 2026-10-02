@@ -1,0 +1,41 @@
+# Decap CMS configuration — https://decapcms.org/docs/configuration-options/
+
+backend:
+  name: github
+  repo: JaimeTorrealba/happenence
+  branch: main
+
+# Lets you edit content on http://localhost:3000/admin/ without logging in to GitHub.
+# Only used when the CMS runs on localhost; requires `npx decap-server` running alongside `pnpm dev`.
+local_backend: true
+
+# Where uploaded images are saved in the repo, and the URL they are served from
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: pages
+    label: Pages
+    files:
+      - name: home
+        label: Home
+        file: content/index.md
+        format: frontmatter
+        fields:
+          - { label: Title, name: title, widget: string }
+          - label: SEO description
+            name: description
+            widget: text
+            hint: One or two sentences. Used by Google, social previews and AI assistants.
+          - { label: Button text, name: buttonText, widget: string }
+          - { label: Button link, name: buttonLink, widget: string }
+          - label: Writings
+            name: links
+            widget: list
+            summary: "{{fields.label}}"
+            fields:
+              - { label: Title, name: label, widget: string }
+              - { label: Link, name: to, widget: string }
+              - { label: Image, name: image, widget: image, required: false }
+              - { label: Image description (alt text), name: imageAlt, widget: string, required: false }
+          - { label: Body, name: body, widget: markdown }
