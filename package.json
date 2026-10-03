@@ -19,6 +19,8 @@
     "nuxt-llms": "^0.2.0",
     "nuxt-schema-org": "^6.4.3",
     "nuxt-seo-utils": "^8.6.1",
+    "three": "^0.186.1",
+    "tweakpane": "^4.0.5",
     "vue": "^3.5.43",
     "vue-router": "^5.3.1"
   },

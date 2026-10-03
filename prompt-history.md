@@ -46,3 +46,15 @@
 - Check the tags on the titles are they h1?
 - let's reduce the page transition to 0.2s
 - We need to fix the titles flashing visible for a split second on first full page load before the animation hides them — it looks bad
+
+## Session 2026-10-03 (aurora debug)
+
+- install and set tweakpane for the about page, the aurora effect. This need to be only accessible and dynamically import if the url contain the hash #debug otherwise should not be shipped to the browser
+- Perfect can we replace the aurora effect for this: https://vue-bits.dev/backgrounds/silk (you can install threejs or vueuse only)
+
+## Session 2026-10-03 (cherry tree model)
+
+- Add this model "japanese_cherry_tree_low-poly.glb" to the bottom of the home page please using threejs
+- can we change the colour of the silk? I can change one colour but the other is always black?
+- Why the about page has a vertical scroll?? if there is no that much content
+- This looks fantastic can we add the bg to the contents too please

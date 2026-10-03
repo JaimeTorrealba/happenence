@@ -15,4 +15,4 @@ description: Run the Happenence Nuxt site locally and check pages over HTTP (SSR
 - Pages: `/`, `/about`, `/contents`, `/legal`. Writing cards are `<ClientOnly>`; SSR shows the fallback list on `/contents`.
 - AEO: `/llms.txt` (should have a Writings section), `/raw/<page>.md`.
 - Decap: `/admin/index.html`. Parse `public/admin/config.yml` with js-yaml from `node_modules/.pnpm/js-yaml@*`.
-- Client-only WebGL (About aurora) can't be observed without a browser. Fetch `/_nuxt/components/about/AuroraBackground.vue` to confirm it compiles, and say that the visuals weren't checked.
+- Client-only WebGL (About/Contents silk) can't be observed without a browser. Fetch `/_nuxt/components/SilkBackground.vue` to confirm it compiles, and say that the visuals weren't checked.

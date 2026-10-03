@@ -21,7 +21,7 @@ const NavItems = [
 </template>
 
 <style scoped>
-/* Translucent so page backgrounds (like the About aurora) show through. */
+/* Translucent so page backgrounds (like the About silk) show through. */
 .site-navbar-bar {
   display: flex;
   align-items: stretch;

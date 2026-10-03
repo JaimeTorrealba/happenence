@@ -25,6 +25,9 @@ useTitleReveal(ContentsTitleRef);
 
 <template>
   <main class="contents-container">
+    <ClientOnly>
+      <SilkBackground />
+    </ClientOnly>
     <div class="overflow-hidden">
       <h1 ref="ContentsTitleRef" class="contents-title reveal-title">{{ ContentsPage.title }}</h1>
     </div>
