@@ -36,7 +36,12 @@ export default defineNuxtConfig({
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
       htmlAttrs: { lang: 'en' },
-      link: [{ rel: 'alternate', type: 'text/plain', href: '/llms.txt', title: 'LLM-friendly site index' }],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
+        { rel: 'alternate', type: 'text/plain', href: '/llms.txt', title: 'LLM-friendly site index' },
+      ],
       // Without JS the entrance animations never run, so show the elements they would reveal.
       noscript: [{ innerHTML: '<style>.reveal-title,.reveal-fade{opacity:1!important}</style>' }],
     },

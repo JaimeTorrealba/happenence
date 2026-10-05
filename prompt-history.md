@@ -58,3 +58,11 @@
 - can we change the colour of the silk? I can change one colour but the other is always black?
 - Why the about page has a vertical scroll?? if there is no that much content
 - This looks fantastic can we add the bg to the contents too please
+
+## Session 2026-10-05 (netlify deploy)
+
+- (pasted Netlify deploy log) Deploy did not succeed: Deploy directory '.output/public' does not exist
+
+## Session 2026-10-05 (favicon)
+
+- Can you take the ff7b2af8-1ca6-4686-ab1f-0c0a1803c7a0_250x250 file convert it and set it as favicon please
