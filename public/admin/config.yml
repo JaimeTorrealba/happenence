@@ -2,7 +2,7 @@
 
 backend:
   name: github
-  repo: JaimeTorrealba/happenence
+  repo: N2Shader/happenence
   branch: main
 
 # Lets you edit content on http://localhost:3000/admin/ without logging in to GitHub.
