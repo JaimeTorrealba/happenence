@@ -16,6 +16,9 @@ public_folder: /images/uploads
 collections:
   - name: pages
     label: Pages
+    # Hides the live preview pane and its "Toggle preview" / "Toggle scroll sync" buttons
+    editor:
+      preview: false
     files:
       - name: home
         label: Home
