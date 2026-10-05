@@ -1,6 +1,7 @@
 [build]
   command = "pnpm generate"
-  publish = ".output/public"
+  # On Netlify, Nitro auto-selects the netlify-static preset, which writes to dist/ (not .output/public).
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "24"
