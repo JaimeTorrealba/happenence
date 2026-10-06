@@ -66,3 +66,59 @@
 ## Session 2026-10-05 (favicon)
 
 - Can you take the ff7b2af8-1ca6-4686-ab1f-0c0a1803c7a0_250x250 file convert it and set it as favicon please
+
+## Session 2026-10-05 (decap oauth org restriction)
+
+- Got this error from decap cms when trying to edit something: Failed to persist entry: API_ERROR: ... the `N2Shader` organization has enabled OAuth App access restrictions ...
+- Nothing is happening I did everything you said
+
+## Session 2026-10-05 (decap preview toggle)
+
+- Is possible to remove the "toggle preview" buttons from decabCMS?
+
+## Session 2026-10-05 (draco cherry tree)
+
+- My japanese_cherry_tree_low-poly.glb model now has draco compression can you adapt the code to be able to read it (this normally means downloading the draco and put it on public folder to decode it
+- Cherry tree model failed to load: Error: THREE.GLTFLoader: setKTX2Loader must be called before loading KTX2 textures
+- ok let's remote the button the CTA and let's add tweakpane to the tree with scale and position. and let's stop the rotation
+- too much effort I need that the position values are slides
+- (pasted pane JSON: scale 1.11, position 0 / -0.09 / 0) Set this values
+- Ok let's go step by step with this... First the tree model should be set on a way that the leaves are different from the trunk. the first step is to hide (we're going to make them appear later) them so we can only see the branches
+- Perfect... Now Can we add an intro animation based on a dissolved effect. you can check the code here https://github.com/JaimeTorrealba/creative-lab/blob/main/src/components/demos/d-g/dissolve-tsl/index.vue — Duration 1.5s ease-in (use GSAP)
+- I agree with both of your recomendation, the timming and the placement please fix them
+- add a button on the tweakpane for "reset dissolve animation" and the easing and time parameters
+- Also can we add another one. in ,my opinion the animation is starting on the wrong sides, can we add a scale or an offset parameter to the noise
+- Almost got it but the animation is not quite on point... the time is 2s but I would like to instead of noise we replace it and create the illusion that the tree is appearing from the bottom (with a noise value so is not that even)
+- On the home page we're tweaking the tree model. Can we after the full tree is draw (the init animation is finish probably using timeline of gsap) make the leaves fade in
+- what's your opinion, I think we can add glow post processing to enchanche the scene
+- Let's try your both of your recomendations Make the growing edge of the dissolve glow  & Optionally, a soft pink halo around the finished tree.
+- it looks fantastics! thanks/effort high
+
+## Session 2026-10-06 (home split layout)
+
+- Implement plan: home page split layout on desktop (logo + title + description in a 1/3 left column, cherry tree scene in a 2/3 right column at >= 768px; stacked on mobile)
+- The happenence logo needs to be on top and center (before the split view)
+- On the tree animation there is something weird happening: the tree appears, then the leaves, but after a moment more leaves and some branches suddenly appear
+
+## Session 2026-10-06 (cherry tree sway)
+
+- Implement plan: cherry tree bones + mouse-swipe sway (build a bone rig at runtime since the GLB has none, skin bark and blossoms with shared weights, spring physics that bends the tree toward the swipe direction and springs back, Sway folder in the debug pane, settings moved to utils/cherryTreeSettings.js)
+- Last bit for this session would be that if I clicked (or tap) the tree should gently move (probably zig zag)
+
+## Session 2026-10-06 (cherry tree dust)
+
+- (Earlier question about ArtStation; the exact wording wasn't carried into the implementation session.)
+- Implement plan: floating dust particles around the cherry tree (round, semi-transparent motes between a gentle yellow and #ffb7c5, drifting in a shader-driven Points cloud with its own frame loop while the tree is on screen, faded in with the leaves, every value in a Dust folder of the #debug pane)
+
+## Session 2026-10-06 (cherry tree petals)
+
+- Implement plan: wind-blown cherry petals while the tree sways (CPU-physics pool in an InstancedMesh, the sway's bend speed as wind so later swipes push falling petals, a burst on click, petals fade out and vanish at the trunk base, Petals folder in the #debug pane)
+
+## Session 2026-10-06 (cherry tree grass)
+
+- Implement plan: grass disc under the cherry tree (flat circle at the trunk base covered in instanced blades in the style of Tres's rapier-car GrassField: random yaw/height, baked Perlin height and colour noise, darker bases, unlit tint, travelling wind wave; colour uniform instead of the splat texture, no trample or road, blades only inside the circle, every value in a Grass folder of the #debug pane, blades grow from 0 while the leaves fade in; renderer/scene/camera/resize split out to utils/cherryTreeStage.js to keep HomeCherryTree.vue under 250 lines)
+- Yes please fix those 2 points. Ground before the intro: make it appear together with the grass, right now the empty circle looks bad. Framing: this is simple, let's reduce the radius a little
+- Also make the tweakpane folder start close. not open please
+- For the grass: shadow intensity 1, subdivisions 60, height randomness 0.5. Leaves: duration 1.5s. Petals: both colours pink and white should be #ffb7c5. BUG: there is a thin black/gray line at the bottom of the petals (heart shape), investigate and remove it. Dust: both colours pink and yellow should be #ffb7c5, opacity 0.9
+- Last thing for this session: the size of the experience and the tree is the desired one, but below 1100px (before it collapses at 768px into a different layout) the tree gets clipped badly, leaving users at that resolution with half an experience. Make it responsive there: keep the same aspect ratio but smaller. The same problem happens below 560px
+- This is exactly what I want BUT it starts to shrink before the measure I told you, so now we have a small tree at 1280 for example, or at 700px. Stick with the measure I told you and only shrink between 1100px and 760px, and below 560px

@@ -30,8 +30,6 @@ collections:
             name: description
             widget: text
             hint: One or two sentences. Used by Google, social previews and AI assistants.
-          - { label: Button text, name: buttonText, widget: string }
-          - { label: Button link, name: buttonLink, widget: string }
           - { label: Body, name: body, widget: markdown }
       - name: contents
         label: Contents

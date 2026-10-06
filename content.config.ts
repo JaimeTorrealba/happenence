@@ -10,8 +10,6 @@ export default defineContentConfig({
         type: 'page',
         source: '**/*.md',
         schema: z.object({
-          buttonText: z.string().optional(),
-          buttonLink: z.string().optional(),
           links: z
             .array(
               z.object({
