@@ -122,3 +122,28 @@
 - For the grass: shadow intensity 1, subdivisions 60, height randomness 0.5. Leaves: duration 1.5s. Petals: both colours pink and white should be #ffb7c5. BUG: there is a thin black/gray line at the bottom of the petals (heart shape), investigate and remove it. Dust: both colours pink and yellow should be #ffb7c5, opacity 0.9
 - Last thing for this session: the size of the experience and the tree is the desired one, but below 1100px (before it collapses at 768px into a different layout) the tree gets clipped badly, leaving users at that resolution with half an experience. Make it responsive there: keep the same aspect ratio but smaller. The same problem happens below 560px
 - This is exactly what I want BUT it starts to shrink before the measure I told you, so now we have a small tree at 1280 for example, or at 700px. Stick with the measure I told you and only shrink between 1100px and 760px, and below 560px
+
+## Session 2026-10-07 (page transitions)
+
+- (Planning prompts asking for a creative page transition like https://www.virugroup.com/en/nosotros/ where only the content changes and the navbar and footer stay; the exact wording wasn't carried into the implementation session.)
+- Implement plan: "blossom sweep" page transition overlay (4 bands in the destination page's colour sweep in from the left over the content area only, the destination name rises from a mask and ~6 petals ride the gust, then everything sweeps out to the right; driven from NuxtPage's transition JS hooks with GSAP, no barba.js; navbar and footer stay above it; new pages' entrance animations delayed to match the reveal; WebGL canvases disposed only after the page has left; reduced motion swaps instantly; petal SVG shared as PetalShape.vue)
+- Why did you add the line about the Gmail, Google Calendar and Google Drive connectors needing authorising? What does it refer to?
+- I think I made a mistake: it doesn't look that good if the menu and footer are always there and the transition only happens on the content. The transition looks amazing. Let's go back and have the navbar and the footer be affected by the transition too
+
+## Session 2026-10-07 (contents accordion gallery)
+
+- Implement plan: replace the Contents page CardSwap with the Vue Bits Accordion Gallery (new AccordionGallery.vue ported from Tailwind to scoped CSS, GSAP logic in composables/useAccordionGallery.js, items taken straight from the content `links`, SSR nav fallback kept, CardSwap.vue and Cards.vue deleted, no new packages)
+
+## Session 2026-10-07 (verify pending changes)
+
+- /verify
+- Implement plan: verify the pending changes over HTTP with no browser (dev server on 3917 outside the sandbox; SSR of /, /about, /contents, /legal with navbar, transition overlay, writings fallback nav and footer petals; compile check of the new components/composables/utils; leftover CardSwap/Cards refs; llms.txt and /raw/contents.md; Decap admin and config.yml; dev log warnings; stop the server)
+- Add to the claude.md of this project. this is an art website no test is necessary
+- clear
+
+## Session 2026-10-07 (full site audit fixes)
+
+- /audit-all (accessibility, best-practices, seo, gsap-performance, web-quality-audit merged into one report with top issues)
+- Implement plan: audit fixes (pin Decap + SRI; security and cache headers in netlify.toml; edge function excludes the big binaries; accordion a11y: plain links in list items, visible focus ring, no aria-current, transform-only will-change, instant resize layout; NuxtRouteAnnouncer + skip link + main#main; dead CSS removed; LCP reveals no longer start at opacity 0; lazy-hydrated cherry tree; no permanent will-change on overlay bands; footer loops paused off-screen; silk DPR capped at 1; description typo, og:image, schema logo, logo width/height, footer Legal contrast)
+- continue
+- try again

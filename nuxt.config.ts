@@ -4,7 +4,8 @@ import { fileURLToPath } from 'node:url'
 // NUXT_SITE_URL wins; otherwise Netlify's build-time URL (the custom domain once it is set).
 const SiteUrl = process.env.NUXT_SITE_URL || process.env.URL || 'http://localhost:3000'
 const SiteName = 'Happenence'
-const SiteDescription = 'Happenence is a simple company grow with love.'
+// TODO: extend to ~150–160 characters (what Happenence writes about) for search snippets.
+const SiteDescription = 'Happenence is a simple company grown with love.'
 const SubstackUrl = 'https://happenence.substack.com'
 const ContentDir = fileURLToPath(new URL('./content', import.meta.url))
 
@@ -43,7 +44,7 @@ export default defineNuxtConfig({
         { rel: 'alternate', type: 'text/plain', href: '/llms.txt', title: 'LLM-friendly site index' },
       ],
       // Without JS the entrance animations never run, so show the elements they would reveal.
-      noscript: [{ innerHTML: '<style>.reveal-title,.reveal-fade{opacity:1!important}</style>' }],
+      noscript: [{ innerHTML: '<style>.reveal-title{transform:none!important}.reveal-fade{opacity:1!important}</style>' }],
     },
   },
 
@@ -72,6 +73,8 @@ export default defineNuxtConfig({
       '@type': 'Organization',
       name: SiteName,
       url: SiteUrl,
+      // Google wants a raster logo of at least 112px; the 180px touch icon works until a dedicated PNG exists.
+      logo: '/apple-touch-icon.png',
       sameAs: [SubstackUrl],
     },
   },

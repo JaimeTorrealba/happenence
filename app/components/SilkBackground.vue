@@ -128,7 +128,8 @@ onMounted(() => {
   };
 
   const resizeCanvasToContainer = () => {
-    const PixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    // The pattern is soft, so 1x looks the same on retina screens at a quarter of the pixels to shade.
+    const PixelRatio = Math.min(window.devicePixelRatio || 1, 1);
     Canvas.width = Math.max(1, Math.floor(Container.offsetWidth * PixelRatio));
     Canvas.height = Math.max(1, Math.floor(Container.offsetHeight * PixelRatio));
     Gl.viewport(0, 0, Canvas.width, Canvas.height);
@@ -178,8 +179,9 @@ onBeforeUnmount(() => {
   SilkDebugPane?.dispose();
   cancelAnimationFrame(AnimationFrameId);
   ContainerResizeObserver?.disconnect();
-  SilkGl?.getExtension("WEBGL_lose_context")?.loseContext();
 });
+// The silk stays frozen on its last frame until the transition overlay has covered it.
+useDisposeAfterPageLeave(() => SilkGl?.getExtension("WEBGL_lose_context")?.loseContext());
 </script>
 
 <template>

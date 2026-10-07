@@ -41,6 +41,13 @@ export const config: Config = {
   excludedPath: [
     "/_nuxt/*",
     "/images/*",
+    "/models/*",
+    "/draco/*",
+    "/basis/*",
+    "/*.png",
+    "/*.svg",
+    "/*/_payload.json",
+    "/_payload.json",
     "/admin/*",
     "/raw/*",
     "/llms.txt",

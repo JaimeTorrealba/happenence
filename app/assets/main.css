@@ -37,20 +37,15 @@ img {
 }
 
 /* Entrance animations (utils/animations.js) start hidden so SSR HTML doesn't flash before hydration.
-   Reduced-motion users skip the animation, so they keep the visible state; no-JS is reset in nuxt.config. */
+   Reduced-motion users skip the animation, so they keep the visible state; no-JS is reset in nuxt.config.
+   Neither start state uses opacity: 0, because the browser doesn't count a fully transparent element as
+   painted and LCP would wait for hydration plus the tween. Titles sit below their .overflow-hidden mask;
+   the fade starts at 0.01, which looks hidden but still counts as painted. */
 @media (prefers-reduced-motion: no-preference) {
-  .reveal-title,
-  .reveal-fade {
-    opacity: 0;
+  .reveal-title {
+    transform: translateY(100%);
   }
-}
-
-/* Route change: fade the old page out, then the new one in (app.pageTransition in nuxt.config) */
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.2s ease-out;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
+  .reveal-fade {
+    opacity: 0.01;
+  }
 }

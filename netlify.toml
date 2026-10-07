@@ -23,8 +23,46 @@
   [headers.values]
     Content-Type = "text/plain; charset=utf-8"
 
-# Advertise the LLM index on every response.
+# Advertise the LLM index on every response, plus the security headers.
+# The CSP is report-only for now: check the browser console on a deploy preview for violations,
+# then rename it to Content-Security-Policy. 'wasm-unsafe-eval' and blob: workers are for the
+# Draco/Basis decoders of the home cherry tree; 'unsafe-inline' covers Nuxt's inline payload script.
 [[headers]]
   for = "/*"
   [headers.values]
     Link = "</llms.txt>; rel=\"llms-txt\""
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    X-Frame-Options = "DENY"
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' blob: data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+
+# Decap CMS loads from jsDelivr, logs in through Netlify and talks to the GitHub API, so the admin
+# gets its own, looser policy (Netlify sends every matching rule, so this one is report-only too).
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com; img-src 'self' data: blob: https:; font-src 'self' data: https:; connect-src 'self' https://api.github.com https://api.netlify.com https://raw.githubusercontent.com; frame-src 'self' https://api.netlify.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+
+# Static binaries for the home cherry tree. The decoders never change between deploys; the model may,
+# so it is cached for a week and then revalidated.
+[[headers]]
+  for = "/draco/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/basis/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/models/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, must-revalidate"

@@ -27,16 +27,17 @@ useFadeIn(LogoTitleRef);
 </script>
 
 <template>
-  <main class="home-container">
+  <main id="main" class="home-container">
     <!-- The logo keeps the h1 so the page still has "Happenence" as its main heading -->
     <h1 ref="LogoTitleRef" class="home-title reveal-fade">
-      <img :src="HomeLogoSrc" alt="Happenence" class="home-logo" />
+      <img :src="HomeLogoSrc" alt="Happenence" class="home-logo" width="324" height="68" />
     </h1>
     <div class="home-column"><HomeIntro :page="HomePage" /></div>
-    <!-- The frame reserves the scene height in the SSR HTML so nothing jumps when the canvas mounts -->
+    <!-- The frame reserves the scene height in the SSR HTML so nothing jumps when the canvas mounts.
+         Lazy- keeps three.js and the scene in their own chunk, fetched after the page has hydrated. -->
     <div class="home-scene">
       <div class="home-scene-frame">
-        <ClientOnly><HomeCherryTree /></ClientOnly>
+        <ClientOnly><LazyHomeCherryTree /></ClientOnly>
       </div>
     </div>
   </main>

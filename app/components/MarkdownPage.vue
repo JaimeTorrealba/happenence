@@ -27,7 +27,7 @@ useTitleReveal(MarkdownTitleRef);
 </script>
 
 <template>
-  <main class="markdown-page-container">
+  <main id="main" class="markdown-page-container">
     <div class="overflow-hidden">
       <h1 ref="MarkdownTitleRef" class="markdown-page-title reveal-title">{{ MarkdownDocument.title }}</h1>
     </div>

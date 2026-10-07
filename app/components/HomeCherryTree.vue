@@ -208,8 +208,9 @@ onBeforeUnmount(() => {
   CherryTreePetals?.disposeCherryTreePetals();
   CherryTreeDust?.disposeCherryTreeDust();
   CherryTreeDebugPane?.dispose();
-  CherryTreeStage?.disposeCherryTreeStage();
 });
+// The tree stays drawn (frozen) until the transition overlay has covered it.
+useDisposeAfterPageLeave(() => CherryTreeStage?.disposeCherryTreeStage());
 </script>
 
 <template>

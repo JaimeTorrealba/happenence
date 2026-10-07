@@ -7,7 +7,15 @@
     <title>Content Manager</title>
   </head>
   <body>
-    <!-- Include the script that builds the page and powers Decap CMS -->
-    <script src="https://cdn.jsdelivr.net/npm/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- Include the script that builds the page and powers Decap CMS.
+         Pinned to an exact version with an integrity hash: this page holds a GitHub token with write
+         access to the repo, so the CDN must not be able to swap the script. To upgrade, change the
+         version and recompute the hash:
+         curl -sL <url> | openssl dgst -sha384 -binary | openssl base64 -A -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/decap-cms@3.16.3/dist/decap-cms.js"
+      integrity="sha384-A/Gdn928CNLufmnGWGs9RM4Q9o8bSNLeJERqBFrBjwzL7FRpoLT3MPF8Tl0+Wd2p"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

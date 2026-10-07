@@ -11,6 +11,9 @@ const FooterImages = {
 const FooterRef = ref(null);
 const PetalsRef = ref(null);
 let BranchesMatchMedia = null;
+let BranchTimelines = [];
+let IsFooterOffScreen = false;
+let FooterVisibilityObserver = null;
 
 // A soft gust: the branch bends (skew + tilt, pivoting at the trunk so the tips move most),
 // springs back a little past rest, settles, then waits for the next gust.
@@ -33,12 +36,29 @@ onMounted(() => {
 
   BranchesMatchMedia = gsap.matchMedia();
   BranchesMatchMedia.add("(prefers-reduced-motion: no-preference)", () => {
-    getBranchBendTimeline(BranchLeft, "left", 0);
-    getBranchBendTimeline(BranchRight, "right", 1.4);
+    BranchTimelines = [getBranchBendTimeline(BranchLeft, "left", 0), getBranchBendTimeline(BranchRight, "right", 1.4)];
+    if (IsFooterOffScreen) setFooterMotionPaused(true);
+    return () => (BranchTimelines = []);
   });
+
+  FooterVisibilityObserver = new IntersectionObserver(([Entry]) => {
+    IsFooterOffScreen = !Entry.isIntersecting;
+    setFooterMotionPaused(IsFooterOffScreen);
+  });
+  FooterVisibilityObserver.observe(FooterRef.value);
 });
 
-onBeforeUnmount(() => BranchesMatchMedia?.revert());
+// The gusts and idle petals loop forever, so they stop while the footer is off-screen
+// instead of keeping GSAP's ticker busy on every page.
+const setFooterMotionPaused = (IsPaused) => {
+  BranchTimelines.forEach((Timeline) => (IsPaused ? Timeline.pause() : Timeline.resume()));
+  PetalsRef.value?.setIdleDriftPaused(IsPaused);
+};
+
+onBeforeUnmount(() => {
+  FooterVisibilityObserver?.disconnect();
+  BranchesMatchMedia?.revert();
+});
 </script>
 
 <template>
@@ -52,7 +72,7 @@ onBeforeUnmount(() => BranchesMatchMedia?.revert());
     </span>
     <div class="footer-content">
       <NuxtLink to="/" class="footer-wordmark" aria-label="Happenence home">
-        <img :src="FooterImages.Wordmark" alt="Happenence" />
+        <img :src="FooterImages.Wordmark" alt="Happenence" width="324" height="68" />
       </NuxtLink>
       <NuxtLink to="/legal" class="footer-legal">Legal</NuxtLink>
     </div>
@@ -100,7 +120,8 @@ onBeforeUnmount(() => BranchesMatchMedia?.revert());
   height: auto;
 }
 .footer-legal {
-  color: #8a6a55;
+  /* Navbar brown: 5.2:1 on the footer background (#8a6a55 was 4.4:1, under AA for this small text) */
+  color: #7c6052;
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;

@@ -24,7 +24,7 @@ useTitleReveal(ContentsTitleRef);
 </script>
 
 <template>
-  <main class="contents-container">
+  <main id="main" class="contents-container">
     <ClientOnly>
       <SilkBackground />
     </ClientOnly>
@@ -32,9 +32,9 @@ useTitleReveal(ContentsTitleRef);
       <h1 ref="ContentsTitleRef" class="contents-title reveal-title">{{ ContentsPage.title }}</h1>
     </div>
     <ContentRenderer :value="ContentsPage" />
-    <div class="cards-wrapper">
+    <div class="writings-wrapper">
       <ClientOnly>
-        <Cards :writings="Writings" />
+        <AccordionGallery :items="Writings" />
         <!-- Server-rendered list so crawlers and agents see the writing links -->
         <template #fallback>
           <nav aria-label="Writings">
@@ -62,7 +62,7 @@ useTitleReveal(ContentsTitleRef);
   text-align: center;
   padding-bottom: 1rem;
 }
-.cards-wrapper {
-  position: relative;
+.writings-wrapper {
+  margin-top: 2rem;
 }
 </style>

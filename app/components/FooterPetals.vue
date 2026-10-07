@@ -28,6 +28,7 @@ let PetalsMatchMedia = null;
 let IsMotionAllowed = false;
 let NextPetalIndex = 0;
 let IdleDriftCall = null;
+let IsIdleDriftPaused = false;
 const getRandomBetween = gsap.utils.random;
 
 const getNextPetalElement = () => {
@@ -102,13 +103,21 @@ const scheduleIdleDrift = () => {
   });
 };
 
+// Called by the footer as it leaves or enters the viewport; petals already falling finish on their own.
+const setIdleDriftPaused = (IsPaused) => {
+  IsIdleDriftPaused = IsPaused;
+  IdleDriftCall?.kill();
+  IdleDriftCall = null;
+  if (!IsPaused && IsMotionAllowed) scheduleIdleDrift();
+};
+
 onMounted(() => {
   const Petals = PetalsRef.value.querySelectorAll(".footer-petal");
 
   PetalsMatchMedia = gsap.matchMedia();
   PetalsMatchMedia.add("(prefers-reduced-motion: no-preference)", () => {
     IsMotionAllowed = true;
-    scheduleIdleDrift();
+    if (!IsIdleDriftPaused) scheduleIdleDrift();
     return () => {
       IsMotionAllowed = false;
       IdleDriftCall?.kill();
@@ -124,16 +133,13 @@ onMounted(() => {
 
 onBeforeUnmount(() => PetalsMatchMedia?.revert());
 
-defineExpose({ releasePetalsFromSide });
+defineExpose({ releasePetalsFromSide, setIdleDriftPaused });
 </script>
 
 <template>
   <div ref="PetalsRef" class="footer-petals" aria-hidden="true">
     <span v-for="(Petal, Index) in PetalPool" :key="Index" class="footer-petal">
-      <svg class="footer-petal-shape" viewBox="0 0 20 20" :width="Petal.Size" :height="Petal.Size">
-        <path d="M10 1C15 4 18.5 10 14.5 16C11.5 20 6 19.5 4 15.5C1.5 10.5 4.5 3.5 10 1Z" :fill="Petal.Tone" />
-        <path d="M10 3.5C9 8 8.5 12 9 17" stroke="#8a4a2a" stroke-opacity="0.25" stroke-width="0.8" fill="none" />
-      </svg>
+      <PetalShape class="footer-petal-shape" :size="Petal.Size" :tone="Petal.Tone" />
     </span>
   </div>
 </template>
