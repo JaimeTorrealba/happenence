@@ -44,7 +44,7 @@ export default defineNuxtConfig({
         { rel: 'alternate', type: 'text/plain', href: '/llms.txt', title: 'LLM-friendly site index' },
       ],
       // Without JS the entrance animations never run, so show the elements they would reveal.
-      noscript: [{ innerHTML: '<style>.reveal-title{transform:none!important}.reveal-fade{opacity:1!important}</style>' }],
+      noscript: [{ innerHTML: '<style>.reveal-title{transform:none!important}.reveal-fade{opacity:1!important}.reveal-lines{opacity:1!important}</style>' }],
     },
   },
 

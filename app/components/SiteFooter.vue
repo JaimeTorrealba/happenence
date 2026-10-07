@@ -88,7 +88,9 @@ onBeforeUnmount(() => {
   justify-content: center;
   min-height: 128px;
   padding: 1rem;
-  background: #f5f3ee;
+  /* The top edge fades in from transparent, so the page (or the fixed silk) blends into the footer colour.
+     A mask-image would also fade the branches pinned at top: 0. */
+  background: linear-gradient(to bottom, rgba(245, 243, 238, 0) 0, #f5f3ee 3rem);
 }
 .footer-branch {
   position: absolute;

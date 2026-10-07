@@ -17,18 +17,36 @@ const NavItems = [
         </NuxtLink>
       </div>
     </nav>
+    <!-- The curved bottom of the bar, sitting flush under it. -->
+    <svg class="site-navbar-wave" viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <path d="M0,0 H300 V13 Q255,18 150,5.5 T0,13 Z" />
+    </svg>
   </header>
 </template>
 
 <style scoped>
-/* Translucent so page backgrounds (like the About silk) show through. */
+/* The bar and the wave share one colour, and the shadow sits on the header so both render in one
+   layer (a filter on the wave alone composites it apart from the bar, which can shift its colour).
+   They match the page colour, so the shadow under the wave is what separates the navbar from it. */
+.site-navbar {
+  --site-navbar-color: #f6f5f2;
+  filter: drop-shadow(0 2px 3px rgba(124, 96, 82, 0.15));
+}
 .site-navbar-bar {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
   width: 100%;
   padding-inline: 0.5rem;
-  background: rgba(245, 243, 238, 0.6);
+  background: var(--site-navbar-color);
+}
+.site-navbar-wave {
+  display: block;
+  width: 100%;
+  height: clamp(12px, 2vw, 24px);
+}
+.site-navbar-wave path {
+  fill: var(--site-navbar-color);
 }
 .site-navbar-items {
   display: flex;

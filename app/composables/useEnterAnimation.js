@@ -26,3 +26,5 @@ export const useEnterAnimation = (ElementRef, animateElement, Options = {}) => {
 export const useTitleReveal = (ElementRef, Options) => useEnterAnimation(ElementRef, animateTitleReveal, Options);
 
 export const useFadeIn = (ElementRef, Options) => useEnterAnimation(ElementRef, animateFadeIn, Options);
+
+export const useLinesReveal = (ElementRef, Options) => useEnterAnimation(ElementRef, animateLinesReveal, Options);

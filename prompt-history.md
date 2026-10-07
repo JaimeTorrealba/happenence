@@ -147,3 +147,11 @@
 - Implement plan: audit fixes (pin Decap + SRI; security and cache headers in netlify.toml; edge function excludes the big binaries; accordion a11y: plain links in list items, visible focus ring, no aria-current, transform-only will-change, instant resize layout; NuxtRouteAnnouncer + skip link + main#main; dead CSS removed; LCP reveals no longer start at opacity 0; lazy-hydrated cherry tree; no permanent will-change on overlay bands; footer loops paused off-screen; silk DPR capped at 1; description typo, og:image, schema logo, logo width/height, footer Legal contrast)
 - continue
 - try again
+
+## Session 2026-10-07 (second-review polish)
+
+- Implement plan: second-review polish before client feedback (SplitText line reveal for the Markdown page bodies on Home/About/Legal/Contents with a hidden CSS start state; soft gradient top edge on the footer; silk defaults speed 15, #ffffff / #f5f3ee; curved wave SVG under the navbar from the CodePen path; cientos-style MouseParallax on the home camera, factor 7.25, ease 0.1, whole viewport, Parallax folder in #debug; research only on PCF shadows from the tree onto the grass)
+- Let's remove the parallax is not working as I expected
+- What happen with the SVG I can see it but is invisible, can we put it #F6F5F2
+- a soft drop shadow under the wave (filter: drop-shadow(0 2px 3px rgba(124, 96, 82, 0.15))); But also and this is important, the navbar right now it has some opacity (this was added to show the bg effect on about/content page) let's remove it and just has the plain colour
+- The colour of the navbar is not the same as the svg... they need to be the same color

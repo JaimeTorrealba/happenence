@@ -2,11 +2,11 @@
 // Silk background, ported from Vue Bits (https://vue-bits.dev/backgrounds/silk) to plain WebGL2
 // so it doesn't need the `ogl` library. Auto-imported as <SilkBackground />; used on About and Contents.
 const Props = defineProps({
-  speed: { type: Number, default: 5 },
+  speed: { type: Number, default: 15 },
   scale: { type: Number, default: 1 },
-  color: { type: String, default: "#e4e4e4" },
+  color: { type: String, default: "#ffffff" },
   // The color the folds fade into. The original always fades to black.
-  shadowColor: { type: String, default: "#ffffff" },
+  shadowColor: { type: String, default: "#f5f3ee" },
   noiseIntensity: { type: Number, default: 1.5 },
   rotation: { type: Number, default: 0 },
 });

@@ -21,6 +21,9 @@ useHead({
 
 const ContentsTitleRef = ref(null);
 useTitleReveal(ContentsTitleRef);
+
+const ContentsBodyRef = ref(null);
+useLinesReveal(ContentsBodyRef, { delay: 0.25 });
 </script>
 
 <template>
@@ -31,7 +34,9 @@ useTitleReveal(ContentsTitleRef);
     <div class="overflow-hidden">
       <h1 ref="ContentsTitleRef" class="contents-title reveal-title">{{ ContentsPage.title }}</h1>
     </div>
-    <ContentRenderer :value="ContentsPage" />
+    <div ref="ContentsBodyRef" class="reveal-lines">
+      <ContentRenderer :value="ContentsPage" />
+    </div>
     <div class="writings-wrapper">
       <ClientOnly>
         <AccordionGallery :items="Writings" />

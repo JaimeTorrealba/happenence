@@ -24,6 +24,9 @@ useHead({
 
 const MarkdownTitleRef = ref(null);
 useTitleReveal(MarkdownTitleRef);
+
+const MarkdownBodyRef = ref(null);
+useLinesReveal(MarkdownBodyRef, { delay: 0.25 });
 </script>
 
 <template>
@@ -31,7 +34,9 @@ useTitleReveal(MarkdownTitleRef);
     <div class="overflow-hidden">
       <h1 ref="MarkdownTitleRef" class="markdown-page-title reveal-title">{{ MarkdownDocument.title }}</h1>
     </div>
-    <ContentRenderer :value="MarkdownDocument" class="markdown-page-body" />
+    <div ref="MarkdownBodyRef" class="reveal-lines">
+      <ContentRenderer :value="MarkdownDocument" class="markdown-page-body" />
+    </div>
   </main>
 </template>
 

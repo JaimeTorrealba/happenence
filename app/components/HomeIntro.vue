@@ -5,12 +5,17 @@ defineProps({
 
 const IntroTitleRef = ref(null);
 useTitleReveal(IntroTitleRef, { delay: 0.3 });
+
+const IntroBodyRef = ref(null);
+useLinesReveal(IntroBodyRef, { delay: 0.5 });
 </script>
 <template>
   <div class="overflow-hidden">
     <h2 ref="IntroTitleRef" class="home-intro-title reveal-title">{{ page.title }}</h2>
   </div>
-  <ContentRenderer :value="page" class="home-intro-body" />
+  <div ref="IntroBodyRef" class="reveal-lines">
+    <ContentRenderer :value="page" class="home-intro-body" />
+  </div>
 </template>
 <style scoped>
 .home-intro-title {
